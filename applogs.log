@@ -1,0 +1,4 @@
+app_logger INFO inside command query method
+app_logger INFO The list of valid commands is  []
+app_logger INFO Inside commands post method
+app_logger ERROR An internal server error was generated, Error is  'NoneType' object is not iterable

@@ -15,7 +15,7 @@ class Command(Base):
 
     def __repr__(self, *args, **kwargs):
         string = 'Command: Name:{} Length:{} Duration:{} Output:{}'.format(self.command_string, self.length, self.duration, self.output)
-        print('object string value is ', string)
+        # print('object string value is ', string)
         return string
 
     def __init__(self, command_string, length, duration, output):

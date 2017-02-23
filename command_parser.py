@@ -7,7 +7,12 @@ from db import Session
 from datetime import datetime
 import subprocess as sb
 import sqlite3 as sqlite
+import time as time
+import logging
+import sys
 
+logging.basicConfig(level=logging.INFO, filename='applogs.log', filemode='w', format='%(name)s %(levelname)s %(message)s')
+logger = logging.getLogger('app_logger') 
 
 def get_valid_commands(queue, fi):
     # TODO: efficiently evaluate commands
@@ -16,44 +21,54 @@ def get_valid_commands(queue, fi):
     sections = file_config.sections()
     commands = set()
     valid_commands = set()
-    print("Available sections in given configuration file are", sections)
-    print(" List of keys in  COMMAND_LIST are :")
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    logger.info("Available sections in given configuration file are {}".format(sections))
+    logger.info(" List of keys in  COMMAND_LIST are :")
+    logger.info("-----------------------------------------------------")
     for key in file_config['COMMAND LIST']:
-        print(key)
+        logger.info(key)
         commands.add(key)
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    print(" List of keys in  VALID_COMMANDS are :")
+    logger.info("-----------------------------------------------------")
+    logger.info(" List of keys in  VALID_COMMANDS are :")
     for key in file_config['VALID COMMANDS']:
-        print(key)
+        logger.info(key)
         valid_commands.add(key)
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    logger.info("------------------------------------------------------")
     commands_to_ptocess = commands.intersection(valid_commands)
-    print("List of valid commands are as follows")
+    logger.info("List of valid commands are as follows")
     for command in commands_to_ptocess:
-        print(command)
+        logger.info(command)
         queue.put(command)
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    logger.info("------------------------------------------------------")
 
 
 def process_command_output(queue):
     # TODO: run the command and put its data in the db
     command = queue.get()
-    print("Command name is ", command)
-    # data = command.split()
-    '''
-    start_time = datetime.now()
-    process = sb.Popen(command, stdout=sb.PIPE)
-    command_output = process.communicate()[0]
-    print('Command output is ', command_output)
-    command_error = process.communicate()[1]
-    print('Command error  is ', command_error)
-    duration = (datetime.now() - start_time)*1000
-   '''
-    length = len(command)
-    new_command = Command(command, length, 0, memoryview(b'nothing'))
-    Session.add(new_command)
-    Session.commit()
-    # Session.close()
-
-
+    data = command.split()
+    start_time = time.time()
+    logger.info('Command currently being executed is {}'.format(command))
+    try:
+    	process = sb.Popen(command, shell=True, stdin=sb.PIPE, stdout=sb.PIPE, stderr=sb.PIPE)
+	while process.poll() == None:
+	   logger.info('command standard output {}'.format(process.stdout.readline()))
+           sys.stdout.write(process.stdout.readline())
+	   if time.time()-start_time>40:
+		session = Session()	 
+                session.add(Command(command, len(command),0,sqlite.Binary('NO_OUTPUT')))
+                session.commit()
+                session.close()
+		return
+	   time.sleep(1)
+	   process.poll()
+    	pipe_output = process.communicate()
+    	command_output = pipe_output[0]
+    	command_error = pipe_output[1]
+    	logger.info('{} generated  {}'.format(command, command_output))
+    	duration = (time.time() - start_time)
+    	length = len(command)
+    	new_command = Command(command, length, duration, sqlite.Binary(command_output))
+    	session = Session()
+    	session.add(new_command)
+    	session.commit()
+    except Exception, e:
+	logger.error('Error generated while executing [{}], generated error is '.format(command, str(e)))

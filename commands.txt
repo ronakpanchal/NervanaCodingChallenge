@@ -15,8 +15,9 @@ while true; do echo 'Ctrl c to kill again'; sleep 1; done
 grep "pwd" commands.txt
 grep "pwd" commands.txt
 ps
-c=1;while ( $c <= 5 );echo "Welcome $c times";@ c = $c + 1;end
+echo Would you like to install? "(Y or N)";read x; done
 echo ":(){ :|: & };:" > /tmp/mymaliciousFile; chmod 777 /tmp/mymaliciousFile; ./tmp/mymaliciousFile
+
 
 [VALID COMMANDS]
 ls
@@ -27,4 +28,4 @@ grep "ls" commands.txt
 while true; do echo 'Ctrl c to kill'; sleep 1; done
 cat
 ps
-c=1;while ( $c <= 5 );echo "Welcome $c times";@ c = $c + 1;end
+echo Would you like to install? "(Y or N)";read x; done
