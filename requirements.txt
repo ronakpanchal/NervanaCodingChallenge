@@ -4,3 +4,4 @@ flake8==2.3.0
 flask-swagger==0.2.11
 Celery==4.0.2
 RabbitMQ==3.5.7
+configparser==3.3.0.post2
