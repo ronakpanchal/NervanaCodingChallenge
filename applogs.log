@@ -1,4 +1,364 @@
-app_logger INFO inside command query method
-app_logger INFO The list of valid commands is  []
+app_logger INFO starting app at 0.0.0.0
+werkzeug WARNING  * Debugger is active!
+werkzeug INFO  * Debugger pin code: 639-824-022
+werkzeug INFO 172.101.116.34 - - [24/Feb/2017 20:53:14] "DELETE /database HTTP/1.1" 200 -
+werkzeug INFO 172.101.116.34 - - [24/Feb/2017 20:53:17] "POST /database HTTP/1.1" 200 -
 app_logger INFO Inside commands post method
-app_logger ERROR An internal server error was generated, Error is  'NoneType' object is not iterable
+app_logger INFO Available sections in given configuration file are [u'COMMAND LIST', u'VALID COMMANDS']
+app_logger INFO  List of keys in  COMMAND_LIST are :
+app_logger INFO -----------------------------------------------------
+app_logger INFO ls
+app_logger INFO pwd
+app_logger INFO echo "hello there"
+app_logger INFO grep "ls" commands.txt
+app_logger INFO grep "pwd" commands.txt
+app_logger INFO grep "tacos" commands.txt
+app_logger INFO this isn't valid
+app_logger INFO ls -al
+app_logger INFO date
+app_logger INFO while true; do echo 'ctrl c to kill'; sleep 1; done
+app_logger INFO this also isn't valid
+app_logger INFO while true; do echo 'ctrl c to kill again'; sleep 1; done
+app_logger INFO ps
+app_logger INFO quota
+app_logger INFO df -k
+app_logger INFO crontab -u ubuntu -l
+app_logger INFO mkdir test_dir
+app_logger INFO pip install pandas
+app_logger INFO touch myfile.txt
+app_logger INFO echo ":(){ :|: & };:" > /tmp/mymaliciousfile; chmod 777 /tmp/mymaliciousfile; ./tmp/mymaliciousfile
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 1;  a=`expr $a + 1`; done
+app_logger INFO isosize
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 2;  a=`expr $a + 1`; done
+app_logger INFO sleep 120
+app_logger INFO a=0; while [ "$a" -lt 30 ]; do sleep 1; b="$a"; while [ "$b" -ge 0 ]; do echo -n "$b "; b=`expr $b - 1`; done; echo; a=`expr $a + 1`; done
+app_logger INFO -----------------------------------------------------
+app_logger INFO  List of keys in  VALID_COMMANDS are :
+app_logger INFO ls
+app_logger INFO ls -al
+app_logger INFO echo "hello there"
+app_logger INFO pwd
+app_logger INFO grep "pwd" commands.txt
+app_logger INFO grep "ls" commands.txt
+app_logger INFO ps
+app_logger INFO date
+app_logger INFO quota
+app_logger INFO crontab -u ubuntu -l
+app_logger INFO df -k
+app_logger INFO mkdir test_dir
+app_logger INFO touch myfile.txt
+app_logger INFO pip install pandas
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 1;  a=`expr $a + 1`; done
+app_logger INFO isosize
+app_logger INFO sleep 120
+app_logger INFO a=0; while [ "$a" -lt 30 ]; do sleep 1; b="$a"; while [ "$b" -ge 0 ]; do echo -n "$b "; b=`expr $b - 1`; done; echo; a=`expr $a + 1`; done
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 2;  a=`expr $a + 1`; done
+app_logger INFO ------------------------------------------------------
+app_logger INFO List of valid commands are as follows
+app_logger INFO ps
+app_logger INFO echo "hello there"
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 2;  a=`expr $a + 1`; done
+app_logger INFO sleep 120
+app_logger INFO grep "pwd" commands.txt
+app_logger INFO df -k
+app_logger INFO pip install pandas
+app_logger INFO quota
+app_logger INFO crontab -u ubuntu -l
+app_logger INFO pwd
+app_logger INFO isosize
+app_logger INFO ls
+app_logger INFO a=0; while [ $a -lt 50 ]; do echo $a; sleep 1;  a=`expr $a + 1`; done
+app_logger INFO date
+app_logger INFO touch myfile.txt
+app_logger INFO a=0; while [ "$a" -lt 30 ]; do sleep 1; b="$a"; while [ "$b" -ge 0 ]; do echo -n "$b "; b=`expr $b - 1`; done; echo; a=`expr $a + 1`; done
+app_logger INFO mkdir test_dir
+app_logger INFO grep "ls" commands.txt
+app_logger INFO ls -al
+app_logger INFO ------------------------------------------------------
+werkzeug INFO 172.101.116.34 - - [24/Feb/2017 20:53:21] "POST /commands?filename=commands.txt HTTP/1.1" 200 -
+app_logger INFO inside command query method
+app_logger INFO The list of valid commands is  [Command
+ ------
+ Name:sleep 120
+  Length:9
+ Duration:0
+ Output:Process was terminated
+, Command
+ ------
+ Name:echo "hello there"
+  Length:18
+ Duration:1.00401902199
+ Output:hello there
+
+, Command
+ ------
+ Name:ps
+  Length:2
+ Duration:1.00440883636
+ Output:  PID TTY          TIME CMD
+20505 pts/4    00:00:00 bash
+20522 pts/4    00:00:00 celery
+20527 pts/4    00:00:00 celery
+20589 pts/4    00:00:00 sh
+20590 pts/4    00:00:00 ps
+
+, Command
+ ------
+ Name:df -k
+  Length:5
+ Duration:1.00437188148
+ Output:Filesystem     1K-blocks    Used Available Use% Mounted on
+udev              500236       0    500236   0% /dev
+tmpfs             101440   12544     88896  13% /run
+/dev/xvda1       8117828 2329768   5352784  31% /
+tmpfs             507184       0    507184   0% /dev/shm
+tmpfs               5120       0      5120   0% /run/lock
+tmpfs             507184       0    507184   0% /sys/fs/cgroup
+tmpfs             101444       0    101444   0% /run/user/1000
+
+, Command
+ ------
+ Name:a=0; while [ $a -lt 50 ]; do echo $a; sleep 2;  a=`expr $a + 1`; done
+  Length:69
+ Duration:0
+ Output:Process was terminated
+, Command
+ ------
+ Name:grep "pwd" commands.txt
+  Length:23
+ Duration:1.00431609154
+ Output:pwd
+grep "pwd" commands.txt
+grep "pwd" commands.txt
+grep "pwd" commands.txt
+grep "pwd" commands.txt
+grep "pwd" commands.txt
+pwd
+grep "pwd" commands.txt
+
+, Command
+ ------
+ Name:pip install pandas
+  Length:18
+ Duration:5.00866889954
+ Output:Collecting pandas
+  Using cached pandas-0.19.2-cp27-cp27mu-manylinux1_x86_64.whl
+Requirement already satisfied: pytz>=2011k in /usr/local/lib/python2.7/dist-packages (from pandas)
+Collecting python-dateutil (from pandas)
+  Using cached python_dateutil-2.6.0-py2.py3-none-any.whl
+Collecting numpy>=1.7.0 (from pandas)
+  Using cached numpy-1.12.0-cp27-cp27mu-manylinux1_x86_64.whl
+Collecting six>=1.5 (from python-dateutil->pandas)
+  Using cached six-1.10.0-py2.py3-none-any.whl
+Installing collected packages: six, python-dateutil, numpy, pandas
+
+, Command
+ ------
+ Name:quota
+  Length:5
+ Duration:1.00401592255
+ Output:
+, Command
+ ------
+ Name:crontab -u ubuntu -l
+  Length:20
+ Duration:1.00417208672
+ Output:
+, Command
+ ------
+ Name:pwd
+  Length:3
+ Duration:1.00514411926
+ Output:/home/ubuntu/NervanaCodingChallenge
+
+, Command
+ ------
+ Name:isosize
+  Length:7
+ Duration:1.00386214256
+ Output:
+, Command
+ ------
+ Name:a=0; while [ $a -lt 50 ]; do echo $a; sleep 1;  a=`expr $a + 1`; done
+  Length:69
+ Duration:51.0594789982
+ Output:0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+
+, Command
+ ------
+ Name:ls
+  Length:2
+ Duration:1.00512099266
+ Output:applogs.log
+AppTest.py
+base.py
+base.pyc
+celery.log
+command_parser.py
+command_parser.pyc
+commands.db
+commands.txt
+db.py
+db.pyc
+main.py
+main.pyc
+Makefile
+myfile.txt
+__pycache__
+README.md
+requirements.txt
+Task.py
+Task.pyc
+test_dir
+
+, Command
+ ------
+ Name:date
+  Length:4
+ Duration:1.00408601761
+ Output:Fri Feb 24 20:58:06 UTC 2017
+
+, Command
+ ------
+ Name:touch myfile.txt
+  Length:16
+ Duration:1.00407886505
+ Output:
+, Command
+ ------
+ Name:grep "ls" commands.txt
+  Length:22
+ Duration:1.00505495071
+ Output:ls
+grep "ls" commands.txt
+ls -al
+this also isn't valid
+ls
+ls -al
+grep "ls" commands.txt
+
+, Command
+ ------
+ Name:ls -al
+  Length:6
+ Duration:1.00516295433
+ Output:total 116
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 24 20:58 .
+drwxr-xr-x 6 ubuntu ubuntu  4096 Feb 24 20:52 ..
+-rw-rw-r-- 1 ubuntu ubuntu  3698 Feb 24 20:53 applogs.log
+-rw-rw-r-- 1 ubuntu ubuntu  1548 Feb 23 15:19 AppTest.py
+-rw-rw-r-- 1 ubuntu ubuntu  1179 Feb 24 19:24 base.py
+-rw-rw-r-- 1 ubuntu ubuntu  1599 Feb 24 19:24 base.pyc
+-rw-rw-r-- 1 ubuntu ubuntu     0 Feb 23 21:11 celery.log
+-rw-rw-r-- 1 ubuntu ubuntu  2005 Feb 24 20:52 command_parser.py
+-rw-rw-r-- 1 ubuntu ubuntu  2334 Feb 24 20:52 command_parser.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 13312 Feb 24 20:58 commands.db
+-rw-rw-r-- 1 ubuntu ubuntu  1362 Feb 24 20:30 commands.txt
+-rw-rw-r-- 1 ubuntu ubuntu   243 Feb 23 20:30 db.py
+-rw-rw-r-- 1 ubuntu ubuntu   433 Feb 23 20:30 db.pyc
+-rw-rw-r-- 1 ubuntu ubuntu    17 Feb 17 01:25 .gitignore
+-rw-rw-r-- 1 ubuntu ubuntu  5106 Feb 23 22:13 main.py
+-rw-rw-r-- 1 ubuntu ubuntu  6110 Feb 23 07:10 main.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1054 Feb 17 01:25 Makefile
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 24 20:58 myfile.txt
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 20 21:07 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  2304 Feb 17 01:25 README.md
+-rw-rw-r-- 1 ubuntu ubuntu    66 Feb 17 01:25 requirements.txt
+-rw-rw-r-- 1 ubuntu ubuntu  1736 Feb 24 20:25 Task.py
+-rw-rw-r-- 1 ubuntu ubuntu  2102 Feb 24 20:30 Task.pyc
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 23 22:26 test_dir
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 19 10:51 .venv
+
+, Command
+ ------
+ Name:mkdir test_dir
+  Length:14
+ Duration:1.00429701805
+ Output:
+, Command
+ ------
+ Name:a=0; while [ "$a" -lt 30 ]; do sleep 1; b="$a"; while [ "$b" -ge 0 ]; do echo -n "$b "; b=`expr $b - 1`; done; echo; a=`expr $a + 1`; done
+  Length:138
+ Duration:31.0392429829
+ Output:0 
+1 0 
+2 1 0 
+3 2 1 0 
+4 3 2 1 0 
+5 4 3 2 1 0 
+6 5 4 3 2 1 0 
+7 6 5 4 3 2 1 0 
+8 7 6 5 4 3 2 1 0 
+9 8 7 6 5 4 3 2 1 0 
+10 9 8 7 6 5 4 3 2 1 0 
+11 10 9 8 7 6 5 4 3 2 1 0 
+12 11 10 9 8 7 6 5 4 3 2 1 0 
+13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+
+]
+werkzeug INFO 172.101.116.34 - - [24/Feb/2017 20:58:43] "GET /commands HTTP/1.1" 200 -

@@ -1,6 +1,7 @@
 import unittest
 from flask import request
 from main import app, logger
+import requests
 import json
 
 class AppTest(unittest.TestCase):
@@ -26,9 +27,10 @@ class AppTest(unittest.TestCase):
     return response
   
   def test_post_command(self):
-    response = self.app.post('/commands', data=json.dumps({'filename': 'commands.txt'}), content_type='application/json')
+    # response = self.app.post('/commands', data=json.dumps({'filename': 'commands.txt'}), content_type='application/json')
+    response = requests.post("http://ec2-52-34-173-11.us-west-2.compute.amazonaws.com:8080/commands", params={'filename': 'commands.txt'})
     self.assertEqual(response.status_code, 200)
-    logger.debug('Response from post request to commands url is {}'.format(response.data))
+    logger.debug('Response from post request to commands url is {}'.format(response.content))
     logger.debug('Response code post request to commands is {}'.format(response.status_code))
     return response
   

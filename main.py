@@ -5,18 +5,20 @@ command details as well as a swagger spec endpoint
 
 from multiprocessing import Process, Queue
 import sys
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_swagger import swagger
 from db import Session, engine
 from base import Base, Command
 from command_parser import get_valid_commands, process_command_output
 import logging
+import os.path
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+#celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 logging.basicConfig(level=logging.INFO, filename='applogs.log', filemode='w', format='%(name)s %(levelname)s %(message)s')
 logger = logging.getLogger('app_logger') 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
 @app.route('/commands', methods=['GET'])
@@ -58,11 +60,14 @@ def process_commands():
         description: Processing OK
     """
     fi = request.args.get('filename')
+    if fi is None or  not os.path.exists(fi):
+	return Response('Missing filename parameter or the File was not found on server ', mimetype='text/plain') 
     logger.info("Inside commands post method")
     queue = Queue()
     get_valid_commands(queue, fi)
+    q_size= queue.qsize()
     processes = [Process(target=process_command_output, args=(queue,))
-                 for num in range(3)]
+                 for num in range(q_size)]
     for process in processes:
         process.start()
     for process in processes:
