@@ -8,11 +8,18 @@ import subprocess as sb
 from base import Command
 import os
 import signal
+from celery import Task
 from celery.utils.log import get_task_logger
 
 
 celery = Celery("tasks", broker='amqp://',backend='amqp', CELERYD_LOG_FILE='celery.log')
 # CELERYD_TASK_SOFT_TIME_LIMIT = 120
+
+class call_back_on_completion(Task):
+	def on_success(self, retval, task_id, args, kwargs):
+		pass
+	def on_failure(self, exc, task_id, args, kwargs, einfo):
+		pass
 
 @celery.task(name="tasks.process_shell_command", base=call_back_on_completion)
 def process_shell_command(command_name):
@@ -51,11 +58,7 @@ def process_shell_command(command_name):
 	except Exception, e:
 		logger.error('Error generated while executing [{}], generated error is {}'.format(command_name, str(e)))
 
-class call_back_on_completion(Task):
-	def on_success(self, retval, task_id, args, kwargs):
-		pass
-	def on_failure(self, exc, task_id, args, kwargs, einfo):
-		pass
+
 		
 if __name__ == "__main__":
     celery.start()
