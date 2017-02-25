@@ -1,0 +1,17 @@
+[COMMAND LIST]
+whoami
+w
+who
+sleep 120
+echo "Mya name is Ronak"
+curl www.mit.edu>mit.txt
+python --version
+
+[VALID COMMANDS]
+whoami 
+w
+who
+sleep 120
+echo "My name is ronak"
+curl www.mit.edu>mit.txt
+python --version

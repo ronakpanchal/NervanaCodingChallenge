@@ -14,7 +14,7 @@ class Command(Base):
     output = Column(BLOB)
 
     def __repr__(self, *args, **kwargs):
-        string = 'Command: Name:{} Length:{} Duration:{} Output:{}'.format(self.command_string, self.length, self.duration, self.output)
+        string = 'Command\n ------\n Name:{}\n  Length:{}\n Duration:{}\n Output:{}\n'.format(self.command_string, self.length, self.duration, self.output)
         # print('object string value is ', string)
         return string
 

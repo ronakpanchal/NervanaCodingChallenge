@@ -16,6 +16,9 @@ import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['DEBUG'] = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+
 #celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 logging.basicConfig(level=logging.INFO, filename='applogs.log', filemode='w', format='%(name)s %(levelname)s %(message)s')
 logger = logging.getLogger('app_logger') 
@@ -61,19 +64,26 @@ def process_commands():
     """
     file_data = request.args.get('file_data')
     fi = request.args.get('filename')
+    data = ''
     if file_data:
 	logger.info('File_data posted in request paylod ,it is {}'.format(file_data))
     	data = json.loads(file_data)
 	if 'COMMAND_LIST' not in data or 'VALID_COMMANDS' not in data:
-		return jsonify({'Error':'Parameter data not in expected format'})
+		response = Response({'Parameters did not match expected format'},content_type='text/plain')
+		response.status_code = 400
+		return response
+	data = json.loads(file_data)
 	logger.info('list of  commands are {}'.format(data['COMMAND_LIST']))
 	logger.info('list of valid commands are {}'.format(data['VALID_COMMANDS']))
     else:
     	if fi is None or  not os.path.exists(fi):
-		return Response('Missing filename parameter or the File was not found on server ', mimetype='text/plain') 
+		response = Response('Missing filename parameter OR File not found', content_type='text/plain')
+		response.status_code = 400
+		return response 
     logger.info("Inside commands post method")
     queue = Queue()
-    get_valid_commands(queue, fi, json.loads(file_data))
+    logger.info('file data value is {}'.format(file_data))
+    get_valid_commands(queue, fi, data)
     q_size= queue.qsize()
     processes = [Process(target=process_command_output, args=(queue,))
                  for num in range(q_size)]
@@ -116,24 +126,23 @@ def drop_db():
 @app.errorhandler(404)
 def page_not_found(error):
     logger.error('Requested URL not found')
-    return jsonify(
-        error='Requested URL not found',
-        error_code=404,
-    )
+    response = Response('Requested URL not found',content_type = 'text/plain')
+    response.status_code = 404
+    return response
 
 @app.errorhandler(500)
 def internal_server_error(error):
     logger.error('An internal server error was generated, Error is  {}'.format(error))
-    return jsonify(
-        error='An internal error was generated',
-    )
+    response = Response('An internal server error was generated', content_type = 'text/plain')
+    response.status_code = 500
+    return response
  
 @app.errorhandler(Exception)
 def unhandled_exception(e):
     logger.error('An internal server error was generated, Error is  {}'.format(e))
-    return jsonify(
-        error='An internal error was generated',
-    )
+    response = Response('An internal server error was generated', content_type='text/plain')
+    response.status_code = 500
+    return response
 
 if __name__ == '__main__':
     """

@@ -6,27 +6,33 @@ import sys
 import time as time
 import subprocess as sb
 from base import Command
+import os
+import signal
 from celery.utils.log import get_task_logger
 
 
 celery = Celery("tasks", broker='amqp://',backend='amqp', CELERYD_LOG_FILE='celery.log')
+# CELERYD_TASK_SOFT_TIME_LIMIT = 120
 
-
-@celery.task(name="tasks.process_shell_command")
+@celery.task(name="tasks.process_shell_command", base=call_back_on_completion)
 def process_shell_command(command_name):
 	logger = get_task_logger(__name__)
-	logger.info('inside process request async')
 	start_time = time.time()
 	logger.info('Command currently being executed is {}'.format(command_name))
 	try:
-		process = sb.Popen(command_name, shell=True, stdin=sb.PIPE, stdout=sb.PIPE, stderr=sb.PIPE)
+		process = sb.Popen(command_name, shell=True, stdin=sb.PIPE, stdout=sb.PIPE, stderr=sb.PIPE, preexec_fn=os.setsid)
 		process_Terminated = False
-		while process.poll() == None:
-			if time.time()-start_time>60:
+		# The below code snippet handles the case for  taks that take longer then usual(>1 min  to be precise)
+		# As we are setting shell=True in Popen call, calling process.kill() may kill the shell itself
+		# but not its child process (i.e command itself)
+		# As a result we need to assign a session id to the shell(), making it the leader of all the proesses in the group
+		# so when we send  'SIGTERM'  singal to group leader(i.e shel), it is propogated to all its children(i.e commands)
+		while process.poll() is  None:
+			elapsed_time = time.time()-start_time
+			if elapsed_time>60:
+				logger.info('Total elapsed time for task is {}'.format(elapsed_time))
 				process_Terminated = True
-				break;
-			time.sleep(1)
-			process.poll()
+				os.killpg(os.getpgid(process.pid), signal.SIGTERM)
 		pipe_output = process.communicate()
 		command_output = pipe_output[0]
 		logger.info('Output value for {} command is {}'.format(command_name, command_output))
@@ -35,7 +41,7 @@ def process_shell_command(command_name):
 		duration = (time.time() - start_time)
 		if process_Terminated:
 			duration = 0
-			logger.debug('The process was terminated as taking more time then 1 minute')
+			logger.debug('The process was terminated due to long running time')
 			command_output = 'Process was terminated'
 		length = len(command_name)
 		new_command = Command(command_name, length, duration, sqlite.Binary(command_output))
@@ -45,6 +51,11 @@ def process_shell_command(command_name):
 	except Exception, e:
 		logger.error('Error generated while executing [{}], generated error is {}'.format(command_name, str(e)))
 
+class call_back_on_completion(Task):
+	def on_success(self, retval, task_id, args, kwargs):
+		pass
+	def on_failure(self, exc, task_id, args, kwargs, einfo):
+		pass
 		
 if __name__ == "__main__":
     celery.start()
