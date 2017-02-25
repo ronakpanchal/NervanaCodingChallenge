@@ -1,0 +1,308 @@
+[2017-02-25 03:55:34,867: INFO/MainProcess] Received task: tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174]  
+[2017-02-25 03:55:34,871: INFO/MainProcess] Received task: tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1]  
+[2017-02-25 03:55:34,872: INFO/PoolWorker-1] tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174]: inside process request async
+[2017-02-25 03:55:34,872: INFO/PoolWorker-1] tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174]: Command currently being executed is date
+[2017-02-25 03:55:34,874: INFO/PoolWorker-2] tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1]: inside process request async
+[2017-02-25 03:55:34,874: INFO/PoolWorker-2] tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1]: Command currently being executed is ps
+[2017-02-25 03:55:34,881: INFO/MainProcess] Received task: tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101]  
+[2017-02-25 03:55:34,885: INFO/MainProcess] Received task: tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd]  
+[2017-02-25 03:55:34,886: INFO/PoolWorker-4] tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101]: inside process request async
+[2017-02-25 03:55:34,886: INFO/PoolWorker-4] tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101]: Command currently being executed is ls -al
+[2017-02-25 03:55:34,888: INFO/PoolWorker-3] tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd]: inside process request async
+[2017-02-25 03:55:34,888: INFO/PoolWorker-3] tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd]: Command currently being executed is pwd
+[2017-02-25 03:55:34,893: INFO/MainProcess] Received task: tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b]  
+[2017-02-25 03:55:35,881: INFO/PoolWorker-1] tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174]: Output value for date command is Sat Feb 25 03:55:34 UTC 2017
+
+[2017-02-25 03:55:35,881: INFO/PoolWorker-1] tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174]: date generated  Sat Feb 25 03:55:34 UTC 2017
+
+[2017-02-25 03:55:35,881: INFO/PoolWorker-2] tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1]: Output value for ps command is   PID TTY          TIME CMD
+29132 pts/0    00:00:00 bash
+29169 pts/0    00:00:00 celery
+29174 pts/0    00:00:00 celery
+29175 pts/0    00:00:00 celery
+29176 pts/0    00:00:00 celery
+29177 pts/0    00:00:00 celery
+29266 pts/0    00:00:00 sh <defunct>
+29267 pts/0    00:00:00 sh
+29268 pts/0    00:00:00 ps
+29270 pts/0    00:00:00 sh <defunct>
+29271 pts/0    00:00:00 sh <defunct>
+
+[2017-02-25 03:55:35,885: INFO/PoolWorker-2] tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1]: ps generated    PID TTY          TIME CMD
+29132 pts/0    00:00:00 bash
+29169 pts/0    00:00:00 celery
+29174 pts/0    00:00:00 celery
+29175 pts/0    00:00:00 celery
+29176 pts/0    00:00:00 celery
+29177 pts/0    00:00:00 celery
+29266 pts/0    00:00:00 sh <defunct>
+29267 pts/0    00:00:00 sh
+29268 pts/0    00:00:00 ps
+29270 pts/0    00:00:00 sh <defunct>
+29271 pts/0    00:00:00 sh <defunct>
+
+[2017-02-25 03:55:35,895: INFO/PoolWorker-4] tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101]: Output value for ls -al command is total 120
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 25 03:53 .
+drwxr-xr-x 6 ubuntu ubuntu  4096 Feb 25 03:49 ..
+-rw-rw-r-- 1 ubuntu ubuntu  1315 Feb 25 03:55 applogs.log
+-rw-rw-r-- 1 ubuntu ubuntu  1548 Feb 23 15:19 AppTest.py
+-rw-rw-r-- 1 ubuntu ubuntu  1179 Feb 24 19:24 base.py
+-rw-rw-r-- 1 ubuntu ubuntu  1599 Feb 24 19:24 base.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1810 Feb 25 03:55 celery.log
+-rw-rw-r-- 1 ubuntu ubuntu  2369 Feb 25 03:49 command_parser.py
+-rw-rw-r-- 1 ubuntu ubuntu  2614 Feb 25 03:51 command_parser.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 14336 Feb 25 03:53 commands.db
+-rw-rw-r-- 1 ubuntu ubuntu  1362 Feb 24 20:30 commands.txt
+-rw-rw-r-- 1 ubuntu ubuntu   243 Feb 23 20:30 db.py
+-rw-rw-r-- 1 ubuntu ubuntu   433 Feb 23 20:30 db.pyc
+-rw-rw-r-- 1 ubuntu ubuntu    17 Feb 17 01:25 .gitignore
+-rw-rw-r-- 1 ubuntu ubuntu  5608 Feb 25 03:48 main.py
+-rw-rw-r-- 1 ubuntu ubuntu  6110 Feb 23 07:10 main.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1054 Feb 17 01:25 Makefile
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 25 01:07 myfile.txt
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 20 21:07 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  2304 Feb 17 01:25 README.md
+-rw-rw-r-- 1 ubuntu ubuntu    66 Feb 17 01:25 requirements.txt
+-rw-rw-r-- 1 ubuntu ubuntu  1758 Feb 25 01:16 Task.py
+-rw-rw-r-- 1 ubuntu ubuntu  2205 Feb 25 02:04 Task.pyc
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 23 22:26 test_dir
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 19 10:51 .venv
+
+[2017-02-25 03:55:35,895: INFO/PoolWorker-4] tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101]: ls -al generated  total 120
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 25 03:53 .
+drwxr-xr-x 6 ubuntu ubuntu  4096 Feb 25 03:49 ..
+-rw-rw-r-- 1 ubuntu ubuntu  1315 Feb 25 03:55 applogs.log
+-rw-rw-r-- 1 ubuntu ubuntu  1548 Feb 23 15:19 AppTest.py
+-rw-rw-r-- 1 ubuntu ubuntu  1179 Feb 24 19:24 base.py
+-rw-rw-r-- 1 ubuntu ubuntu  1599 Feb 24 19:24 base.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1810 Feb 25 03:55 celery.log
+-rw-rw-r-- 1 ubuntu ubuntu  2369 Feb 25 03:49 command_parser.py
+-rw-rw-r-- 1 ubuntu ubuntu  2614 Feb 25 03:51 command_parser.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 14336 Feb 25 03:53 commands.db
+-rw-rw-r-- 1 ubuntu ubuntu  1362 Feb 24 20:30 commands.txt
+-rw-rw-r-- 1 ubuntu ubuntu   243 Feb 23 20:30 db.py
+-rw-rw-r-- 1 ubuntu ubuntu   433 Feb 23 20:30 db.pyc
+-rw-rw-r-- 1 ubuntu ubuntu    17 Feb 17 01:25 .gitignore
+-rw-rw-r-- 1 ubuntu ubuntu  5608 Feb 25 03:48 main.py
+-rw-rw-r-- 1 ubuntu ubuntu  6110 Feb 23 07:10 main.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1054 Feb 17 01:25 Makefile
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 25 01:07 myfile.txt
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 20 21:07 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  2304 Feb 17 01:25 README.md
+-rw-rw-r-- 1 ubuntu ubuntu    66 Feb 17 01:25 requirements.txt
+-rw-rw-r-- 1 ubuntu ubuntu  1758 Feb 25 01:16 Task.py
+-rw-rw-r-- 1 ubuntu ubuntu  2205 Feb 25 02:04 Task.pyc
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 23 22:26 test_dir
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 19 10:51 .venv
+
+[2017-02-25 03:55:35,896: INFO/PoolWorker-3] tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd]: Output value for pwd command is /home/ubuntu/NervanaCodingChallenge
+
+[2017-02-25 03:55:35,897: INFO/PoolWorker-3] tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd]: pwd generated  /home/ubuntu/NervanaCodingChallenge
+
+[2017-02-25 03:55:35,950: INFO/PoolWorker-1] Task tasks.process_shell_command[51e7499b-f09b-4a54-868d-d88008d85174] succeeded in 1.078091915s: None
+[2017-02-25 03:55:35,952: INFO/PoolWorker-1] tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b]: inside process request async
+[2017-02-25 03:55:35,952: INFO/PoolWorker-1] tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b]: Command currently being executed is ls
+[2017-02-25 03:55:35,973: INFO/PoolWorker-2] Task tasks.process_shell_command[c128a526-b7cc-4eee-adb5-9b34455a35d1] succeeded in 1.09953691298s: None
+[2017-02-25 03:55:35,985: INFO/PoolWorker-3] Task tasks.process_shell_command[46161a7c-0e9b-49cf-b97d-d6e525e744cd] succeeded in 1.09781434498s: None
+[2017-02-25 03:55:35,989: INFO/PoolWorker-4] Task tasks.process_shell_command[85707b59-6d61-4b26-bf5a-93a643a96101] succeeded in 1.10349560401s: None
+[2017-02-25 03:55:36,964: INFO/PoolWorker-1] tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b]: Output value for ls command is applogs.log
+AppTest.py
+base.py
+base.pyc
+celery.log
+command_parser.py
+command_parser.pyc
+commands.db
+commands.txt
+db.py
+db.pyc
+main.py
+main.pyc
+Makefile
+myfile.txt
+__pycache__
+README.md
+requirements.txt
+Task.py
+Task.pyc
+test_dir
+
+[2017-02-25 03:55:36,964: INFO/PoolWorker-1] tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b]: ls generated  applogs.log
+AppTest.py
+base.py
+base.pyc
+celery.log
+command_parser.py
+command_parser.pyc
+commands.db
+commands.txt
+db.py
+db.pyc
+main.py
+main.pyc
+Makefile
+myfile.txt
+__pycache__
+README.md
+requirements.txt
+Task.py
+Task.pyc
+test_dir
+
+[2017-02-25 03:55:36,980: INFO/PoolWorker-1] Task tasks.process_shell_command[3c135cd2-8865-4808-a10a-7992474eb57b] succeeded in 1.02789636498s: None
+[2017-02-25 04:04:10,637: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-25 04:04:10,646: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-25 04:04:11,663: INFO/MainProcess] mingle: all alone
+[2017-02-25 04:04:11,675: INFO/MainProcess] celery@ip-172-31-17-197 ready.
+[2017-02-25 04:04:44,398: INFO/MainProcess] Received task: tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9]  
+[2017-02-25 04:04:44,405: INFO/MainProcess] Received task: tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048]  
+[2017-02-25 04:04:44,406: INFO/PoolWorker-1] tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9]: inside process request async
+[2017-02-25 04:04:44,407: INFO/PoolWorker-1] tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9]: Command currently being executed is pwd
+[2017-02-25 04:04:44,408: INFO/PoolWorker-2] tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048]: inside process request async
+[2017-02-25 04:04:44,408: INFO/PoolWorker-2] tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048]: Command currently being executed is ps
+[2017-02-25 04:04:44,418: INFO/MainProcess] Received task: tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6]  
+[2017-02-25 04:04:44,421: INFO/MainProcess] Received task: tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519]  
+[2017-02-25 04:04:44,422: INFO/PoolWorker-4] tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6]: inside process request async
+[2017-02-25 04:04:44,423: INFO/PoolWorker-4] tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6]: Command currently being executed is date
+[2017-02-25 04:04:44,424: INFO/PoolWorker-3] tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519]: inside process request async
+[2017-02-25 04:04:44,424: INFO/PoolWorker-3] tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519]: Command currently being executed is ls
+[2017-02-25 04:04:44,433: INFO/MainProcess] Received task: tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba]  
+[2017-02-25 04:04:45,414: INFO/PoolWorker-1] tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9]: Output value for pwd command is /home/ubuntu/NervanaCodingChallenge
+
+[2017-02-25 04:04:45,415: INFO/PoolWorker-1] tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9]: pwd generated  /home/ubuntu/NervanaCodingChallenge
+
+[2017-02-25 04:04:45,417: INFO/PoolWorker-2] tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048]: Output value for ps command is   PID TTY          TIME CMD
+29466 pts/0    00:00:00 bash
+29485 pts/0    00:00:00 celery
+29490 pts/0    00:00:00 celery
+29491 pts/0    00:00:00 celery
+29492 pts/0    00:00:00 celery
+29493 pts/0    00:00:00 celery
+29508 pts/0    00:00:00 sh <defunct>
+29509 pts/0    00:00:00 sh
+29510 pts/0    00:00:00 ps
+29511 pts/0    00:00:00 sh <defunct>
+29512 pts/0    00:00:00 sh <defunct>
+
+[2017-02-25 04:04:45,417: INFO/PoolWorker-2] tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048]: ps generated    PID TTY          TIME CMD
+29466 pts/0    00:00:00 bash
+29485 pts/0    00:00:00 celery
+29490 pts/0    00:00:00 celery
+29491 pts/0    00:00:00 celery
+29492 pts/0    00:00:00 celery
+29493 pts/0    00:00:00 celery
+29508 pts/0    00:00:00 sh <defunct>
+29509 pts/0    00:00:00 sh
+29510 pts/0    00:00:00 ps
+29511 pts/0    00:00:00 sh <defunct>
+29512 pts/0    00:00:00 sh <defunct>
+
+[2017-02-25 04:04:45,436: INFO/PoolWorker-4] tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6]: Output value for date command is Sat Feb 25 04:04:44 UTC 2017
+
+[2017-02-25 04:04:45,436: INFO/PoolWorker-4] tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6]: date generated  Sat Feb 25 04:04:44 UTC 2017
+
+[2017-02-25 04:04:45,437: INFO/PoolWorker-3] tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519]: Output value for ls command is applogs.log
+AppTest.py
+base.py
+base.pyc
+celery.log
+command_parser.py
+command_parser.pyc
+commands.db
+commands.txt
+db.py
+db.pyc
+main.py
+main.pyc
+Makefile
+myfile.txt
+__pycache__
+README.md
+requirements.txt
+Task.py
+Task.pyc
+test_dir
+
+[2017-02-25 04:04:45,438: INFO/PoolWorker-3] tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519]: ls generated  applogs.log
+AppTest.py
+base.py
+base.pyc
+celery.log
+command_parser.py
+command_parser.pyc
+commands.db
+commands.txt
+db.py
+db.pyc
+main.py
+main.pyc
+Makefile
+myfile.txt
+__pycache__
+README.md
+requirements.txt
+Task.py
+Task.pyc
+test_dir
+
+[2017-02-25 04:04:45,484: INFO/PoolWorker-1] Task tasks.process_shell_command[2a7ba5b1-ece3-4539-ab7f-c188376308e9] succeeded in 1.07728572196s: None
+[2017-02-25 04:04:45,487: INFO/PoolWorker-1] tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba]: inside process request async
+[2017-02-25 04:04:45,487: INFO/PoolWorker-1] tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba]: Command currently being executed is ls -al
+[2017-02-25 04:04:45,501: INFO/PoolWorker-2] Task tasks.process_shell_command[f12d44ab-22e6-4491-93a8-3fe2dbd7c048] succeeded in 1.09295587701s: None
+[2017-02-25 04:04:45,526: INFO/PoolWorker-3] Task tasks.process_shell_command[8b5a50b3-9b59-4b08-bf15-9fd633357519] succeeded in 1.10249596799s: None
+[2017-02-25 04:04:45,530: INFO/PoolWorker-4] Task tasks.process_shell_command[c252fa96-8feb-4c32-ae08-6a991cfc5eb6] succeeded in 1.10823048401s: None
+[2017-02-25 04:04:46,496: INFO/PoolWorker-1] tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba]: Output value for ls -al command is total 132
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 25 04:04 .
+drwxr-xr-x 6 ubuntu ubuntu  4096 Feb 25 04:00 ..
+-rw-rw-r-- 1 ubuntu ubuntu  1315 Feb 25 04:04 applogs.log
+-rw-rw-r-- 1 ubuntu ubuntu  1548 Feb 23 15:19 AppTest.py
+-rw-rw-r-- 1 ubuntu ubuntu  1179 Feb 24 19:24 base.py
+-rw-rw-r-- 1 ubuntu ubuntu  1599 Feb 24 19:24 base.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 13514 Feb 25 04:04 celery.log
+-rw-rw-r-- 1 ubuntu ubuntu  2373 Feb 25 04:00 command_parser.py
+-rw-rw-r-- 1 ubuntu ubuntu  2487 Feb 25 04:03 command_parser.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 14336 Feb 25 04:04 commands.db
+-rw-rw-r-- 1 ubuntu ubuntu  1362 Feb 24 20:30 commands.txt
+-rw-rw-r-- 1 ubuntu ubuntu   243 Feb 23 20:30 db.py
+-rw-rw-r-- 1 ubuntu ubuntu   433 Feb 23 20:30 db.pyc
+-rw-rw-r-- 1 ubuntu ubuntu    17 Feb 17 01:25 .gitignore
+-rw-rw-r-- 1 ubuntu ubuntu  5608 Feb 25 03:48 main.py
+-rw-rw-r-- 1 ubuntu ubuntu  6110 Feb 23 07:10 main.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1054 Feb 17 01:25 Makefile
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 25 01:07 myfile.txt
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 20 21:07 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  2304 Feb 17 01:25 README.md
+-rw-rw-r-- 1 ubuntu ubuntu    66 Feb 17 01:25 requirements.txt
+-rw-rw-r-- 1 ubuntu ubuntu  1758 Feb 25 01:16 Task.py
+-rw-rw-r-- 1 ubuntu ubuntu  2205 Feb 25 02:04 Task.pyc
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 23 22:26 test_dir
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 19 10:51 .venv
+
+[2017-02-25 04:04:46,497: INFO/PoolWorker-1] tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba]: ls -al generated  total 132
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 25 04:04 .
+drwxr-xr-x 6 ubuntu ubuntu  4096 Feb 25 04:00 ..
+-rw-rw-r-- 1 ubuntu ubuntu  1315 Feb 25 04:04 applogs.log
+-rw-rw-r-- 1 ubuntu ubuntu  1548 Feb 23 15:19 AppTest.py
+-rw-rw-r-- 1 ubuntu ubuntu  1179 Feb 24 19:24 base.py
+-rw-rw-r-- 1 ubuntu ubuntu  1599 Feb 24 19:24 base.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 13514 Feb 25 04:04 celery.log
+-rw-rw-r-- 1 ubuntu ubuntu  2373 Feb 25 04:00 command_parser.py
+-rw-rw-r-- 1 ubuntu ubuntu  2487 Feb 25 04:03 command_parser.pyc
+-rw-rw-r-- 1 ubuntu ubuntu 14336 Feb 25 04:04 commands.db
+-rw-rw-r-- 1 ubuntu ubuntu  1362 Feb 24 20:30 commands.txt
+-rw-rw-r-- 1 ubuntu ubuntu   243 Feb 23 20:30 db.py
+-rw-rw-r-- 1 ubuntu ubuntu   433 Feb 23 20:30 db.pyc
+-rw-rw-r-- 1 ubuntu ubuntu    17 Feb 17 01:25 .gitignore
+-rw-rw-r-- 1 ubuntu ubuntu  5608 Feb 25 03:48 main.py
+-rw-rw-r-- 1 ubuntu ubuntu  6110 Feb 23 07:10 main.pyc
+-rw-rw-r-- 1 ubuntu ubuntu  1054 Feb 17 01:25 Makefile
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 25 01:07 myfile.txt
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 20 21:07 __pycache__
+-rw-rw-r-- 1 ubuntu ubuntu  2304 Feb 17 01:25 README.md
+-rw-rw-r-- 1 ubuntu ubuntu    66 Feb 17 01:25 requirements.txt
+-rw-rw-r-- 1 ubuntu ubuntu  1758 Feb 25 01:16 Task.py
+-rw-rw-r-- 1 ubuntu ubuntu  2205 Feb 25 02:04 Task.pyc
+drwxrwxr-x 2 ubuntu ubuntu  4096 Feb 23 22:26 test_dir
+drwxrwxr-x 6 ubuntu ubuntu  4096 Feb 19 10:51 .venv
+
+[2017-02-25 04:04:46,512: INFO/PoolWorker-1] Task tasks.process_shell_command[fd892cf5-2ce0-4d0c-bb88-1e942acbf5ba] succeeded in 1.02460691996s: None

@@ -12,7 +12,7 @@ from base import Base, Command
 from command_parser import get_valid_commands, process_command_output
 import logging
 import os.path
-
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -59,12 +59,21 @@ def process_commands():
       200:
         description: Processing OK
     """
+    file_data = request.args.get('file_data')
     fi = request.args.get('filename')
-    if fi is None or  not os.path.exists(fi):
-	return Response('Missing filename parameter or the File was not found on server ', mimetype='text/plain') 
+    if file_data:
+	logger.info('File_data posted in request paylod ,it is {}'.format(file_data))
+    	data = json.loads(file_data)
+	if 'COMMAND_LIST' not in data or 'VALID_COMMANDS' not in data:
+		return jsonify({'Error':'Parameter data not in expected format'})
+	logger.info('list of  commands are {}'.format(data['COMMAND_LIST']))
+	logger.info('list of valid commands are {}'.format(data['VALID_COMMANDS']))
+    else:
+    	if fi is None or  not os.path.exists(fi):
+		return Response('Missing filename parameter or the File was not found on server ', mimetype='text/plain') 
     logger.info("Inside commands post method")
     queue = Queue()
-    get_valid_commands(queue, fi)
+    get_valid_commands(queue, fi, json.loads(file_data))
     q_size= queue.qsize()
     processes = [Process(target=process_command_output, args=(queue,))
                  for num in range(q_size)]
