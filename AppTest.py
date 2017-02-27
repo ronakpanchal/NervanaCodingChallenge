@@ -28,25 +28,25 @@ class AppTest(unittest.TestCase):
   
   def test_post_command(self):
     # response = self.app.post('/commands', data=json.dumps({'filename': 'commands.txt'}), content_type='application/json')
-    response = requests.post("/commands", params={'filename': 'commands.txt'})
+    response = self.app.post("/commands", query_string='filename='+'commands.txt',content_type='text/plain')
     self.assertEqual(response.status_code, 200)
-    logger.debug('Response from post request to commands url is {}'.format(response.content))
+    logger.debug('Response from post request to commands url is {}'.format(response.data))
     logger.debug('Response code post request to commands is {}'.format(response.status_code))
     return response
   
- def test_post_file_data(self):
+  def test_post_file_data(self):
     file_data = {'COMMAND_LIST':['ls','ls -al'],'VALID_COMMANDS': ['ls','ls -al']}
-    response = requests.post('/commands', params = {'file_data':json.dumps(data)})
+    response = self.app.post('/commands',query_string='file_data='+json.dumps(file_data),content_type='application/json')
     self.assertEqual(response.status_code, 200)
-    logger.debug('response data after posting fiile_data as json payload '.format(response.content))
+    logger.debug('response data after posting fiile_data as json payload '.format(response.data))
     return response
 
- def test_incorrect_params(self):
+  def test_incorrect_params(self):
     file_data = {'COMMANDS_LIST':['ls','ls -al'],'VALID_COMMANDS': ['ls','ls -al']}
-    response = requests.post('/commands', params = {'file_data':json.dumps(data)})
+    response = self.app.post('/commands', query_string='file_data='+json.dumps(file_data), content_type='application/json')
     self.assertEqual(response.status_code, 400)
-    self.assertEqual(response.content, 'Parameters did not match expected format')
-    logger.debug('response data after posting fiile_data as json payload '.format(response.content))
+    self.assertEqual(response.data, 'Parameters did not match expected format')
+    logger.debug('response data after posting fiile_data as json payload '.format(response.data))
     return response
    
  
