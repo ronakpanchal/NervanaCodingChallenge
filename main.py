@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['DEBUG'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
-#celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+
 logging.basicConfig(level=logging.INFO, filename='applogs.log', filemode='w', format='%(name)s %(levelname)s %(message)s')
 logger = logging.getLogger('app_logger') 
 
@@ -41,7 +41,7 @@ def get_command_output():
     command_list = list()
     for command in commands:
         command_list.append(Command(command.command_string, command.length, command.duration, str(command.output)))
-    logger.info('The list of valid commands is  {}'.format(command_list))
+    logger.info('The list of  commands that have been processed are  {}'.format(command_list))
     # TODO: format the query result
     return jsonify(eqtls=[cmd_obj.serialize() for cmd_obj in command_list])
 
@@ -65,6 +65,7 @@ def process_commands():
     file_data = request.args.get('file_data')
     fi = request.args.get('filename')
     data = ''
+    logger.info('The filename posted in the request is {}'.format(file_data))
     if file_data:
 	logger.info('File_data posted in request paylod ,it is {}'.format(file_data))
     	data = json.loads(file_data)
@@ -80,7 +81,6 @@ def process_commands():
 		response = Response('Missing filename parameter OR File not found', content_type='text/plain')
 		response.status_code = 400
 		return response 
-    logger.info("Inside commands post method")
     queue = Queue()
     logger.info('file data value is {}'.format(file_data))
     get_valid_commands(queue, fi, data)
@@ -132,14 +132,14 @@ def page_not_found(error):
 
 @app.errorhandler(500)
 def internal_server_error(error):
-    logger.error('An internal server error was generated, Error is  {}'.format(error))
+    logger.error('An internal server error was generated, the generated error is  {}'.format(error))
     response = Response('An internal server error was generated', content_type = 'text/plain')
     response.status_code = 500
     return response
  
 @app.errorhandler(Exception)
 def unhandled_exception(e):
-    logger.error('An internal server error was generated, Error is  {}'.format(e))
+    logger.error('An internal server error was generated, the generated error is  {}'.format(e))
     response = Response('An internal server error was generated', content_type='text/plain')
     response.status_code = 500
     return response

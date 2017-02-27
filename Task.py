@@ -12,8 +12,12 @@ from celery import Task
 from celery.utils.log import get_task_logger
 
 
-celery = Celery("tasks", broker='amqp://',backend='amqp', CELERYD_LOG_FILE='celery.log')
-# CELERYD_TASK_SOFT_TIME_LIMIT = 120
+celery = Celery("Shell_Proessor", broker='amqp://',backend='amqp', CELERYD_LOG_FILE='celery.log')
+celery.conf.update(result_expires = 3600)
+celery.conf.update(task_soft_time_limit = 100)
+celery.conf.update(worker_concurrency = 4)
+
+
 
 class call_back_on_completion(Task):
 	def on_success(self, retval, task_id, args, kwargs):
@@ -21,7 +25,7 @@ class call_back_on_completion(Task):
 	def on_failure(self, exc, task_id, args, kwargs, einfo):
 		pass
 
-@celery.task(name="tasks.process_shell_command", base=call_back_on_completion)
+@celery.task(name="Shell_Processor.process_shell_command", base=call_back_on_completion)
 def process_shell_command(command_name):
 	logger = get_task_logger(__name__)
 	start_time = time.time()
@@ -37,24 +41,31 @@ def process_shell_command(command_name):
 		while process.poll() is  None:
 			elapsed_time = time.time()-start_time
 			if elapsed_time>60:
-				logger.info('Total elapsed time for task is {}'.format(elapsed_time))
+				logger.info('Total time elapsed while executing task is {}'.format(elapsed_time))
 				process_Terminated = True
 				os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+
+
 		pipe_output = process.communicate()
 		command_output = pipe_output[0]
-		logger.info('Output value for {} command is {}'.format(command_name, command_output))
 		command_error = pipe_output[1]	
 		logger.info('{} generated  {}'.format(command_name, command_output))
 		duration = (time.time() - start_time)
+
+		if not command_output:
+			command_output = command_error
 		if process_Terminated:
 			duration = 0
 			logger.debug('The process was terminated due to long running time')
 			command_output = 'Process was terminated'
 		length = len(command_name)
+
 		new_command = Command(command_name, length, duration, sqlite.Binary(command_output))
+
 		session = Session()
 		session.add(new_command)
 		session.commit()
+
 	except Exception, e:
 		logger.error('Error generated while executing [{}], generated error is {}'.format(command_name, str(e)))
 
