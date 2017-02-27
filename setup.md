@@ -15,9 +15,8 @@
 
 
  <p><h5>A note on logs and test cases </h5></p>
- <ul>
+ <ul></ul>
  <li>Two different log files will be genrated after starting app</li>
  <li>One for application logs and other for logging celery task queue</li>
  <li>File 'applogs.log' corresponds to application logs and celery.log to task queue</li>
  <li>The file AppTest.py has some test cases written to test the app.</li>
- </ul>
