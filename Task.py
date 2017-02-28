@@ -52,8 +52,19 @@ def process_shell_command(command_name):
 		logger.info('{} generated  {}'.format(command_name, command_output))
 		duration = (time.time() - start_time)
 
-		if not command_output:
+		
+		'''
+		If the output value is empty and 
+		the error string is non empty, the executed command errored out
+		'''
+		if not command_output and command_error:
 			command_output = command_error
+		
+		'''
+		If the process was terminated forcefully,set the output to reflect that
+		Also set the duration to 0 to signify that it was terminated abruptly
+		'''
+	
 		if process_Terminated:
 			duration = 0
 			logger.debug('The process was terminated due to long running time')
